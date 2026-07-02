@@ -1,0 +1,247 @@
+import React, { useState, useEffect } from 'react';
+
+export default function Portfolio() {
+  const [scrollY, setScrollY] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const projects = [
+    {
+      title: "Praetoflow",
+      role: "Lead Technical Analyst & Full-Stack Developer",
+      description: "Claims management platform for a South African insurance brokerage. Led end-to-end delivery from discovery through UAT.",
+      highlights: [
+        "Architecture: Next.js 15, React 19, TypeScript, Supabase, Vercel",
+        "5-phase testing strategy: unit → integration → E2E → UAT → monitoring",
+        "Process mapping: 5 domain workflows + 2 rep management models",
+        "User engagement framework: role-based permissions, phased 8-week rollout"
+      ],
+      tags: ["Next.js", "React", "TypeScript", "Supabase", "Testing Strategy", "Process Design"],
+      color: "from-amber-600 to-amber-700"
+    },
+    {
+      title: "Paitons Boutique",
+      role: "Superadmin Developer",
+      description: "Handmade goods ecommerce platform. Full RBAC implementation with product variants and bulk operations.",
+      highlights: [
+        "Phase 1: RBAC (3 roles), Supabase Storage, staff management, PayFast integration",
+        "Phase 2: ProductImageGallery, VariantBuilder (colors/sizes/modifiers), BulkImageUpload",
+        "Audit logging on all operations",
+        "Type-safe API routes with full TypeScript coverage"
+      ],
+      tags: ["React", "Supabase", "RBAC", "eCommerce", "API Design"],
+      color: "from-rose-600 to-rose-700"
+    },
+    {
+      title: "Process & Workflow Design",
+      role: "Business Analyst",
+      description: "Comprehensive process mapping for insurance domain. Documented workflows, actor models, and implementation specs.",
+      highlights: [
+        "5 domain workflows: Short-Term, Funeral, Gap Cover, Life, Government Claims",
+        "SVG diagrams in brand palette (charcoal, gold, stone, sage, dusty rose)",
+        "Admin Portal spec: 11 register types, 2 report types, field-level activity logs",
+        "Rep workflow documentation via live stakeholder interviews"
+      ],
+      tags: ["Process Mapping", "Requirements", "Stakeholder Interviews", "Documentation"],
+      color: "from-slate-600 to-slate-700"
+    }
+  ];
+
+  const skills = {
+    "Technical": ["Next.js", "React", "TypeScript", "Supabase", "Tailwind CSS", "Jest", "Playwright", "Node.js"],
+    "Analysis & Strategy": ["Requirements Gathering", "Process Mapping", "Gap Analysis", "Testing Strategy", "User Engagement Design", "Phased Rollout Planning"],
+    "Domain": ["Insurance Claims", "Workflow Automation", "Role-Based Access Control", "Payment Integration", "eCommerce"],
+    "Tools": ["Figma", "Vercel", "Box", "Outlook", "VS Code", "Git"]
+  };
+
+  return (
+    <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen overflow-hidden">
+      {/* Animated bg elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-900/10 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-amber-700/5 rounded-full blur-3xl opacity-10"></div>
+      </div>
+
+      <div className="relative z-10">
+        {/* Header/Navigation */}
+        <header className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-sm border-b border-amber-600/20 z-50">
+          <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="text-xl font-semibold tracking-tight">J</div>
+            <nav className="hidden sm:flex gap-8 text-sm">
+              <a href="#about" className="text-slate-300 hover:text-amber-400 transition">About</a>
+              <a href="#work" className="text-slate-300 hover:text-amber-400 transition">Work</a>
+              <a href="#skills" className="text-slate-300 hover:text-amber-400 transition">Skills</a>
+              <a href="#contact" className="text-slate-300 hover:text-amber-400 transition">Contact</a>
+            </nav>
+          </div>
+        </header>
+
+        {/* Hero */}
+        <section className="pt-32 pb-24 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div 
+              className="space-y-8"
+              style={{
+                opacity: Math.max(0.3, 1 - scrollY / 400),
+                transform: `translateY(${scrollY * 0.3}px)`
+              }}
+            >
+              <div className="space-y-4">
+                <h1 className="text-6xl sm:text-7xl font-bold tracking-tight">
+                  Technical Analyst <span className="text-amber-400">+</span> Full-Stack Developer
+                </h1>
+                <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+                  I bridge business complexity and technical implementation. Based in Durban, South Africa. Currently shipping claims management systems and ecommerce platforms.
+                </p>
+              </div>
+
+              <div className="flex gap-6 pt-4">
+                <a href="#work" className="px-8 py-3 bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold rounded-lg transition">
+                  View Work →
+                </a>
+                <a href="#contact" className="px-8 py-3 border border-amber-600/50 hover:border-amber-400 text-amber-400 font-semibold rounded-lg transition">
+                  Get in Touch
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About */}
+        <section id="about" className="py-24 px-6 border-t border-amber-600/20">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">About</h2>
+              <div className="space-y-4 text-slate-300 leading-relaxed">
+                <p>I'm a technical business analyst and full-stack developer at Praeto Risk & Insurance Management Solutions, a South African insurance brokerage. I work across process mapping, requirements gathering, and end-to-end development.</p>
+                <p>My approach: understand business workflows deeply, translate them into technical specs, and build solutions that actually work at the intersection of insurance domain knowledge and modern tech.</p>
+                <p>Beyond Praeto, I take on freelance development—mostly ecommerce platforms and custom web applications for small South African businesses.</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="p-6 bg-slate-800/50 border border-amber-600/20 rounded-lg">
+                <h3 className="text-amber-400 font-semibold mb-2">What I Do</h3>
+                <ul className="space-y-2 text-slate-300 text-sm">
+                  <li>• End-to-end product discovery & architecture</li>
+                  <li>• Process mapping & workflow design</li>
+                  <li>• Full-stack development (Next.js, React, Supabase)</li>
+                  <li>• Testing strategy & QA oversight</li>
+                  <li>• User engagement & phased rollout</li>
+                </ul>
+              </div>
+
+              <div className="p-6 bg-slate-800/50 border border-amber-600/20 rounded-lg">
+                <h3 className="text-amber-400 font-semibold mb-2">Current Stack</h3>
+                <p className="text-slate-300 text-sm">Next.js 15 • React 19 • TypeScript • Supabase • Tailwind • Jest • Playwright • Vercel</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Work */}
+        <section id="work" className="py-24 px-6 border-t border-amber-600/20">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-bold mb-16">Featured Work</h2>
+            
+            <div className="space-y-12">
+              {projects.map((proj, idx) => (
+                <div 
+                  key={idx}
+                  className="group p-8 bg-slate-800/30 border border-amber-600/20 hover:border-amber-400/40 rounded-lg transition duration-300"
+                  style={{
+                    transform: `translateY(${Math.max(0, (scrollY - 800 - idx * 200) * 0.1)}px)`
+                  }}
+                >
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-2xl font-bold group-hover:text-amber-400 transition">{proj.title}</h3>
+                      <p className="text-amber-400 text-sm mt-1">{proj.role}</p>
+                    </div>
+
+                    <p className="text-slate-300 leading-relaxed">{proj.description}</p>
+
+                    <ul className="space-y-2 text-slate-300 text-sm">
+                      {proj.highlights.map((h, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span className="text-amber-400 flex-shrink-0 font-bold">→</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap gap-2 pt-4">
+                      {proj.tags.map((tag, i) => (
+                        <span key={i} className="px-3 py-1 bg-amber-900/40 border border-amber-600/40 text-amber-300 text-xs rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="py-24 px-6 border-t border-amber-600/20">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-bold mb-16">Skills & Expertise</h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {Object.entries(skills).map(([category, items]) => (
+                <div key={category} className="space-y-4">
+                  <h3 className="text-lg font-semibold text-amber-400">{category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {items.map((skill, i) => (
+                      <span 
+                        key={i}
+                        className="px-4 py-2 bg-slate-800/50 border border-slate-700 hover:border-amber-400/50 text-slate-200 hover:text-amber-400 text-sm rounded transition"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="py-24 px-6 border-t border-amber-600/20">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8">Let's Work Together</h2>
+            <p className="text-slate-300 text-lg mb-12 max-w-2xl mx-auto">
+              I'm interested in full-time roles, freelance projects, and consulting. Especially for insurance tech, ecommerce, or anything at the intersection of business complexity and elegant technical solutions.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="mailto:your.email@example.com" className="px-8 py-3 bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold rounded-lg transition">
+                Email Me
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-amber-600/50 hover:border-amber-400 text-amber-400 font-semibold rounded-lg transition">
+                LinkedIn
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-slate-700 hover:border-amber-400 text-slate-300 hover:text-amber-400 font-semibold rounded-lg transition">
+                GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-12 px-6 border-t border-amber-600/20 text-center text-slate-400 text-sm">
+          <div className="max-w-5xl mx-auto">
+            <p>Durban, South Africa • EST 2026</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+}

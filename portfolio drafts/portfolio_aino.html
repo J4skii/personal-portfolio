@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J — Technical Strategist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f0;
+            color: #181818;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body.dark {
+            background: #181818;
+            color: #f5f5f0;
+        }
+
+        /* Header */
+        header {
+            padding: 32px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark header {
+            background: rgba(24, 24, 24, 0.95);
+            border-bottom-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid currentColor;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            opacity: 1;
+        }
+
+        /* Hero */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            margin-top: 80px;
+        }
+
+        h1 {
+            font-size: 72px;
+            line-height: 1.1;
+            margin-bottom: 48px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            max-width: 900px;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            max-width: 500px;
+            opacity: 0.7;
+            margin-bottom: 60px;
+            line-height: 1.8;
+        }
+
+        .cta {
+            display: inline-flex;
+            gap: 16px;
+            align-items: center;
+            padding: 16px 32px;
+            border: 1px solid currentColor;
+            text-decoration: none;
+            color: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .cta:hover {
+            transform: translate(4px, -4px);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .cta:hover {
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Section Title */
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.4;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 80px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            max-width: 800px;
+        }
+
+        /* Work Grid */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .work-item {
+            aspect-ratio: 1;
+            background: #e8e8e0;
+            border: 1px solid #d0d0c8;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        body.dark .work-item {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+        }
+
+        .work-item:hover {
+            transform: translate(-8px, -8px);
+            box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .work-item:hover {
+            box-shadow: 12px 12px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .work-item-number {
+            font-size: 32px;
+            opacity: 0.2;
+            font-weight: 700;
+        }
+
+        .work-item-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .work-item-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: #e8e8e0;
+            margin-left: -40px;
+            margin-right: -40px;
+            padding: 120px 40px;
+        }
+
+        body.dark .process-section {
+            background: #2a2a2a;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 0;
+        }
+
+        .process-box {
+            padding: 60px;
+            background: #f5f5f0;
+            border: 1px solid #d0d0c8;
+            transition: all 0.3s;
+        }
+
+        body.dark .process-box {
+            background: #181818;
+            border-color: #3a3a3a;
+        }
+
+        .process-box:hover {
+            transform: scale(1.02);
+        }
+
+        .process-number {
+            font-size: 40px;
+            font-weight: 700;
+            opacity: 0.1;
+            margin-bottom: 20px;
+        }
+
+        .process-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .process-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 80px 40px;
+            margin-left: -40px;
+            margin-right: -40px;
+            background: #f5f5f0;
+            border-top: 1px solid #d0d0c8;
+            border-bottom: 1px solid #d0d0c8;
+        }
+
+        body.dark .stats-row {
+            background: #181818;
+            border-color: #3a3a3a;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .about-text strong {
+            display: block;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .method-list {
+            list-style: none;
+        }
+
+        .method-list li {
+            padding: 12px 0;
+            font-size: 13px;
+            opacity: 0.7;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .method-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Stack Grid */
+        .stack-section {
+            background: #e8e8e0;
+            margin-left: -40px;
+            margin-right: -40px;
+            padding: 120px 40px;
+        }
+
+        body.dark .stack-section {
+            background: #2a2a2a;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+
+        .stack-item {
+            padding: 20px;
+            background: #f5f5f0;
+            border: 1px solid #d0d0c8;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        body.dark .stack-item {
+            background: #181818;
+            border-color: #3a3a3a;
+        }
+
+        .stack-item:hover {
+            transform: translateY(-4px);
+            border-color: currentColor;
+        }
+
+        /* Contact */
+        .contact-section {
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 32px;
+        }
+
+        .contact-desc {
+            font-size: 18px;
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            color: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 32px;
+            border: 1px solid currentColor;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .contact-link:hover {
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 40px;
+            text-align: center;
+            opacity: 0.4;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark footer {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .work-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .work-item:nth-child(1) { animation-delay: 0.1s; }
+        .work-item:nth-child(2) { animation-delay: 0.2s; }
+        .work-item:nth-child(3) { animation-delay: 0.3s; }
+        .work-item:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stack-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            h2 {
+                font-size: 40px;
+            }
+
+            section {
+                padding: 80px 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 20px 24px;
+            }
+
+            .nav-group {
+                gap: 24px;
+            }
+
+            nav a {
+                display: none;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+                padding: 60px 24px;
+            }
+
+            .stack-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .cta {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">J</div>
+        <div class="nav-group">
+            <nav>
+                <a href="#work">Work</a>
+                <a href="#process">Process</a>
+                <a href="#about">About</a>
+            </nav>
+            <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero fade-in">
+        <h1>Technical strategist bridging business complexity and technical excellence</h1>
+        <p class="hero-desc">I translate messy business problems into clear requirements, then build systems that work. Experienced in insurance workflows, ecommerce platforms, and scaling complex systems.</p>
+        <a href="#work" class="cta">Explore Work →</a>
+    </section>
+
+    <!-- Work -->
+    <section id="work">
+        <div class="section-label">Featured Work</div>
+        <h2>Selected Projects</h2>
+        
+        <div class="work-grid">
+            <a href="#" class="work-item">
+                <div>
+                    <div class="work-item-number">01</div>
+                </div>
+                <div>
+                    <div class="work-item-title">Praetoflow</div>
+                    <div class="work-item-type">Claims Management System</div>
+                </div>
+            </a>
+            <a href="#" class="work-item">
+                <div>
+                    <div class="work-item-number">02</div>
+                </div>
+                <div>
+                    <div class="work-item-title">Paitons Boutique</div>
+                    <div class="work-item-type">eCommerce Platform</div>
+                </div>
+            </a>
+            <a href="#" class="work-item">
+                <div>
+                    <div class="work-item-number">03</div>
+                </div>
+                <div>
+                    <div class="work-item-title">Process Architecture</div>
+                    <div class="work-item-type">Workflow Design</div>
+                </div>
+            </a>
+            <a href="#" class="work-item">
+                <div>
+                    <div class="work-item-number">04</div>
+                </div>
+                <div>
+                    <div class="work-item-title">Freelance Projects</div>
+                    <div class="work-item-type">Various Engagements</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="process-section">
+        <div class="section-label">My Approach</div>
+        <h2 style="color: #181818; margin-bottom: 60px;">How I Solve Problems</h2>
+        
+        <div class="process-grid">
+            <div class="process-box">
+                <div class="process-number">01</div>
+                <div class="process-title">Understand</div>
+                <div class="process-desc">Deep dive into the business problem. Sit with stakeholders, map workflows, run workshops. Don't code until I understand the why.</div>
+            </div>
+            <div class="process-box">
+                <div class="process-number">02</div>
+                <div class="process-title">Clarify</div>
+                <div class="process-desc">Translate chaos into specs. Create visual models, decision frameworks, architecture diagrams. Make complexity visible.</div>
+            </div>
+            <div class="process-box">
+                <div class="process-number">03</div>
+                <div class="process-title">Execute</div>
+                <div class="process-desc">Build with precision. Type-safe code, comprehensive testing, documented decisions. Implementation reflects requirements exactly.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Workflows Mapped</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">2</div>
+            <div class="stat-label">Systems Shipped</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">User Adoption</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">8yr</div>
+            <div class="stat-label">Tech Experience</div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-label">About Me</div>
+        <h2>Who I Am</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>Technical analyst and full-stack developer at Praeto Risk & Insurance Management Solutions. I spend time between discovering what businesses actually need and building what works.</p>
+                <p>Most developers start with code. Most analysts stop at specs. I do both—which means I catch gaps before they become production incidents.</p>
+                <p><strong>My superpower:</strong> Taking a messy problem, translating it clearly for technical teams, then implementing it precisely.</p>
+            </div>
+            <ul class="method-list">
+                <li>Listen more than talk</li>
+                <li>Make assumptions visible</li>
+                <li>Design before coding</li>
+                <li>Test comprehensively</li>
+                <li>Document decisions</li>
+                <li>Ship in phases</li>
+                <li>Measure outcomes</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="stack-section">
+        <div class="section-label">Stack</div>
+        <h2 style="color: #181818; margin-bottom: 60px;">Technical Expertise</h2>
+        
+        <div class="stack-grid">
+            <div class="stack-item">React</div>
+            <div class="stack-item">Next.js</div>
+            <div class="stack-item">TypeScript</div>
+            <div class="stack-item">Supabase</div>
+            <div class="stack-item">Node.js</div>
+            <div class="stack-item">Jest</div>
+            <div class="stack-item">Playwright</div>
+            <div class="stack-item">Tailwind</div>
+            <div class="stack-item">Process Mapping</div>
+            <div class="stack-item">Requirements</div>
+            <div class="stack-item">Testing Strategy</div>
+            <div class="stack-item">RBAC Design</div>
+            <div class="stack-item">eCommerce</div>
+            <div class="stack-item">Insurance Domain</div>
+            <div class="stack-item">Vercel</div>
+            <div class="stack-item">Git</div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+        <div class="section-label">Get in Touch</div>
+        <h2>Let's Work Together</h2>
+        <p class="contact-desc">I'm interested in strategic technical roles, consulting engagements, and projects where business complexity meets technical precision. Based in Durban, South Africa.</p>
+        <div class="contact-links">
+            <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+            <a href="https://linkedin.com" class="contact-link">LinkedIn</a>
+            <a href="https://github.com" class="contact-link">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>J • Technical Strategist • 2026</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeButton();
+        }
+
+        function updateThemeButton() {
+            const btn = document.querySelector('.theme-btn');
+            btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
+        updateThemeButton();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
